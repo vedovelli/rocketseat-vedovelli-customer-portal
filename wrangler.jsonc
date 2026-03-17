@@ -9,6 +9,6 @@
     "enabled": true
   },
   "vars": {
-    "BETTER_AUTH_URL": "https://customer-portal.vedovelli.workers.dev"
+    "BETTER_AUTH_URL": "https://customer-portal.fabio-37e.workers.dev"
   }
 }
