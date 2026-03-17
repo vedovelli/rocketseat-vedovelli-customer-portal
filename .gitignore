@@ -1,0 +1,23 @@
+node_modules/
+dist/
+.output/
+.vinxi/
+.wrangler/
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# TanStack Start generated
+src/routeTree.gen.ts
