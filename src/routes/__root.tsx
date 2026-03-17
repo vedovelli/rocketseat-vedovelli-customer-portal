@@ -1,4 +1,5 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import appCss from "@/styles.css?url"
 
 export const Route = createRootRoute({
@@ -16,7 +17,9 @@ export const Route = createRootRoute({
         <HeadContent />
       </head>
       <body>
-        <Outlet />
+        <TooltipProvider>
+          <Outlet />
+        </TooltipProvider>
         <Scripts />
       </body>
     </html>
