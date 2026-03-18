@@ -1,24 +1,28 @@
-import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import { integer, primaryKey, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
 // ─── Tabelas existentes ────────────────────────────────────────────────────
 
 export const customers = sqliteTable("customers", {
   id: integer("id").primaryKey({ autoIncrement: true }).notNull(),
   name: text("name").notNull(),
-  customerKey: text("customer_key").notNull(),
+  customerKey: text("customer_key").notNull().unique(),
   status: text("status").notNull().default("active"),
   createdAt: text("created_at").notNull(),
   updatedAt: text("updated_at").notNull(),
   linearWebhookSecret: text("linear_webhook_secret"),
 })
 
-export const usageDaily = sqliteTable("usage_daily", {
-  customerId: integer("customer_id")
-    .notNull()
-    .references(() => customers.id, { onDelete: "cascade" }),
-  date: text("date").notNull(),
-  events: integer("events").notNull().default(0),
-})
+export const usageDaily = sqliteTable(
+  "usage_daily",
+  {
+    customerId: integer("customer_id")
+      .notNull()
+      .references(() => customers.id, { onDelete: "cascade" }),
+    date: text("date").notNull(),
+    events: integer("events").notNull().default(0),
+  },
+  (t) => [primaryKey({ columns: [t.customerId, t.date] })],
+)
 
 export const tokenUsage = sqliteTable("token_usage", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -51,6 +55,9 @@ export const modelPricing = sqliteTable("model_pricing", {
 })
 
 // ─── Tabelas BetterAuth ────────────────────────────────────────────────────
+// Nota: as tabelas legadas (customers, token_usage, etc.) armazenam timestamps
+// como text (ISO-8601). As tabelas BetterAuth usam integer({ mode: "timestamp" })
+// (Unix epoch em ms). Manter consistência ao adicionar novas colunas de data.
 
 export const user = sqliteTable("user", {
   id: text("id").primaryKey(),

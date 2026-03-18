@@ -21,7 +21,7 @@ function DashboardLayout() {
       style={
         {
           "--sidebar-width": "calc(350px + 0px)",
-          "--header-height": "calc(--spacing(12) + 1px)",
+          "--header-height": "calc(3rem + 1px)",
         } as React.CSSProperties
       }
     >

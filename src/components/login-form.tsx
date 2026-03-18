@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { useRouter } from "@tanstack/react-router"
 import { cn } from "@/lib/utils"
@@ -43,7 +41,7 @@ export function LoginForm({
     setLoading(false)
 
     if (error) {
-      setError(error.message ?? "Credenciais inválidas.")
+      setError("Credenciais inválidas.")
       return
     }
 
@@ -68,6 +66,7 @@ export function LoginForm({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
+                  autoComplete="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -78,6 +77,7 @@ export function LoginForm({
                 <Input
                   id="password"
                   type="password"
+                  autoComplete="current-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
